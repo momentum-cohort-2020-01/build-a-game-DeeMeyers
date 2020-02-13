@@ -4,7 +4,7 @@ class Game {
     constructor() {
         const canvas = document.querySelector('#canvas')
         const screen =  canvas.getContext('2d')
-        canvas.fillStyle = "yellow"
+        
         let gameSize = { x: canvas.width, y: canvas.height }
         this.bodies = []
         this.bodies = this.bodies.concat(new Player(this, gameSize))
@@ -21,7 +21,7 @@ class Game {
     draw (screen, gameSize) {
         // Clear away the drawing from the previous tick.
         screen.clearRect(0, 0, gameSize.x, gameSize.y)
-        fillStyle = "blue"
+        
         // Draw each body as a rectangle.
         for (let i = 0; i < this.bodies.length; i++) {
         drawRect(screen, this.bodies[i])
@@ -43,7 +43,7 @@ class Player {
 
 function drawRect (screen, body) {
     screen.fillRect(10, 10, 25, 25)
-
+    context.fillStyle = black
 }
 
 new Game()
