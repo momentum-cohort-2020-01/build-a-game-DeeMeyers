@@ -1,23 +1,20 @@
-const Keyboarder = {
-  keyState: {},
-  isDown: function (keyCode) {
-    return this.keyState[keyCode] === true
-  },
-  on: function (keyCode, callback) {
-    window.addEventListener('keydown', (e) => {
-      if (e.keyCode === keyCode) {
-        callback()
-      }
+class Keyboarder {
+  constructor () {
+    // Records up/down state of each key that has ever been pressed.
+    let keyState = {}
+    console.log(this.keyState)
+
+    window.addEventListener('keydown', function (event) {
+        keyState[event.key] = true
+      })
+    // When key goes up, record that it is up.
+    window.addEventListener('keyup', function (event) {
+      keyState[event.key] = false
     })
+
+this.isDown = function(keyCode){
+  console.log(keyState)
+  return keyState[keyCode] === true
+  }
   }
 }
-
-window.addEventListener('keydown', function (e) {
-  Keyboarder.keyState[e.keyCode] = true
-})
-
-window.addEventListener('keyup', function (e) {
-  Keyboarder.keyState[e.keyCode] = false
-})
-
-Keyboarder.KEYS = { LEFT: 37, RIGHT: 39, UP: 38, DOWN: 40, S: 83 }
