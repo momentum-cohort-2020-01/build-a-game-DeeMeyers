@@ -45,15 +45,29 @@ class Player {
 
     update () {
         console.log("update ran")
-        if(this.keyboarder.isDown('ArrowLeft')){
-            console.log('left is true')
+        if(this.keyboarder.isDown('ArrowLeft') && (this.center.x >= 0)){
             this.center.x -= 2
         }
-        else if(this.keyboarder.isDown('ArrowRight')){
+        else if(this.keyboarder.isDown('ArrowRight') && (this.center.x <=500)){
             this.center.x += 2
         }
+        else if(this.keyboarder.isDown('ArrowUp') && (this.center.y >= 0)){
+            this.center.y -= 2
+        }
+        else if(this.keyboarder.isDown('ArrowDown') && (this.center.y <= 500)){
+            this.center.y += 2
+        }
+
     }
 }
+
+class Enemy {
+    constructor(game, gameSize){
+        this.game = game
+        this.gameSize = gameSize
+    }
+}
+
 function drawRect (screen, body) {
     screen.fillStyle  = 'red';
     screen.fillRect(body.center.x - body.size.x / 2, body.center.y - body.size.y / 2,
