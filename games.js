@@ -8,6 +8,7 @@ class Game {
         let gameSize = { x: canvas.width, y: canvas.height }
         this.bodies = []
         this.bodies = this.bodies.concat(new Player(this, gameSize))
+        this.bodies = this.bodies.concat(new Enemy(this, gameSize))
 
 
         let tick = () => {
@@ -24,8 +25,16 @@ class Game {
         
         // Draw each body as a rectangle.
         for (let i = 0; i < this.bodies.length; i++) {
-        drawRect(screen, this.bodies[i])
+            console.log(this.bodies[i])
+            if (this.bodies[i] instanceof Player){
+
+                drawRect(screen, this.bodies[i])
+            }
+            else if(this.bodies[i] instanceof Enemy){
+                drawEnemy(screen, this.bodies[i])
+            }
         } 
+        
     }
     update () {
         
@@ -44,7 +53,6 @@ class Player {
     }
 
     update () {
-        console.log("update ran")
         if(this.keyboarder.isDown('ArrowLeft') && (this.center.x >= 0)){
             this.center.x -= 2
         }
@@ -66,8 +74,24 @@ class Enemy {
         this.game = game
         this.gameSize = gameSize
         this.size = {x: 25, y: 25}
-
+        this.center = {x: 0, y: randomY()}
     }
+
+    update(){
+        if(this.center.x <= 500){
+            this.center.x += 7
+        }
+        else{
+            this.center.x = 0
+        }
+        if(this.center.y <= 500){
+            this.center.y += 4*posNeg()
+        }
+        else{
+            this.center.y = 0
+        }
+    }
+
 }
 
 function drawRect (screen, body) {
@@ -76,9 +100,33 @@ function drawRect (screen, body) {
         body.size.x, body.size.y)
     
 }
+//making an enemy: have an enemy move from the left to the right 
+//in a random, straight path. it'll spawn random on the y axis then move
+//linearly across the screen
+//start at random y, add same value to x and y cordinate, check to see if 
+//it has moved off screen, delete it once it reaches off screen
 
-function randomXY(){
-    return Math.floor(Math.random()*Math.floor(501))
+//return interger between 1 and 499, spawn posistion along the y axis
+function randomY(){
+    return Math.floor(Math.random()*Math.floor(500))+1
+}
+
+
+//will be 1 or -1, make enemy go up or down from posistion
+function posNeg(){
+    let temp = Math.random()
+    if(temp > .5){
+        return 1
+    }
+    else{
+        return -1
+    }
+}
+//makes the shape of the enemy at (0, randomY)
+function drawEnemy(screen, body){
+    screen.fillStyle = 'green';
+    screen.fillRect(body.center.x, body.center.y,
+        body.size.x, body.size.y)
 }
 
 new Game()

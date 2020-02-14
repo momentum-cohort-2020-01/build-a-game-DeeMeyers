@@ -2,7 +2,7 @@ class Keyboarder {
   constructor () {
     // Records up/down state of each key that has ever been pressed.
     let keyState = {}
-    console.log(this.keyState)
+    
 
     window.addEventListener('keydown', function (event) {
         keyState[event.key] = true
@@ -12,9 +12,9 @@ class Keyboarder {
       keyState[event.key] = false
     })
 
-this.isDown = function(keyCode){
-  console.log(keyState)
-  return keyState[keyCode] === true
-  }
+    this.isDown = function(keyCode){
+      
+      return keyState[keyCode] === true
+    }
   }
 }
