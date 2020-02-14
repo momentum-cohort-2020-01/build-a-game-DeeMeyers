@@ -65,6 +65,8 @@ class Enemy {
     constructor(game, gameSize){
         this.game = game
         this.gameSize = gameSize
+        this.size = {x: 25, y: 25}
+
     }
 }
 
@@ -73,6 +75,10 @@ function drawRect (screen, body) {
     screen.fillRect(body.center.x - body.size.x / 2, body.center.y - body.size.y / 2,
         body.size.x, body.size.y)
     
+}
+
+function randomXY(){
+    return Math.floor(Math.random()*Math.floor(501))
 }
 
 new Game()
