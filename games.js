@@ -9,6 +9,9 @@ class Game {
         this.bodies = []
         this.bodies = this.bodies.concat(new Player(this, gameSize))
         this.bodies = this.bodies.concat(new Enemy(this, gameSize))
+        this.bodies = this.bodies.concat(new Enemy(this, gameSize))
+        this.bodies = this.bodies.concat(new Enemy(this, gameSize))
+        this.bodies = this.bodies.concat(new Enemy(this, gameSize))
 
 
         let tick = () => {
@@ -85,7 +88,7 @@ class Enemy {
             this.center.x = 0
         }
         if(this.center.y <= 500){
-            this.center.y += 4*posNeg()
+            this.center.y += 6*posNeg()
         }
         else{
             this.center.y = 0
